@@ -1,46 +1,6 @@
-function mergeSort(arr) {
-  // Base case. Single item list
-  // It's already sorted
-  if (arr.length === 1) return arr;
-
-  // Divide and conquer
-
-  // list
-  const m = Math.ceil(arr.length / 2);
-
-  // divide a
-  const aa = mergeSort(arr.slice(0, m));
-
-  // divide b
-  const ba = mergeSort(arr.slice(m));
-
-  return merge(aa, ba);
-
-  // compare el of adjacent list
-  function merge(a, b) {
-    const merged = [];
-
-    while (a && b) {
-      if (a[0] < b[0]) {
-        merged.push(a[0]);
-        a.splice(0, 1);
-      } else {
-        merged.push(b[0]);
-        b.splice(0, 1);
-      }
-    }
-
-    if (!a) merged.push(...b);
-    if (!b) merged.push(...a);
-
-    return merged;
-  }
-}
-
-// const a = mergeSort([1,2]);
-// console.log(a);
-
+// Merge sort algorithm implementation
 function ms(arr) {
+
   if (arr.length === 1) return arr;
 
   // Divide array in two
@@ -52,20 +12,17 @@ function ms(arr) {
 
   let merged = [];
 
-  let i = 0;
-  let j = 0;
-
-  while (i < a.length && j < b.length) {
-    if (a[i] < b[j]) {
-      merged.push(a[i]);
-      i++;
+  while (a[0] && b[0]) {
+    if (a[0] < b[0]) {
+      merged.push(a[0]);
+      a.splice(0, 1);
     } else {
-      merged.push(b[j]);
-      j++;
+      merged.push(b[0]);
+      b.splice(0, 1);
     }
   }
-  if (i === a.length) merged.push(...b);
-  else if (j === b.length) merged.push(...a);
+  if (!a[0]) merged.push(...b);
+  else if (!b[0]) merged.push(...a);
 
   return merged;
 }
