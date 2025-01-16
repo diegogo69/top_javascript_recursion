@@ -94,6 +94,51 @@ let hasIt = contains(nestedObject, 44); // true
 let doesntHaveIt = contains(nestedObject, "foo"); // false
 let doHaveIt = contains(nestedObject, "val"); // false
 
-console.log(hasIt);
-console.log(doesntHaveIt);
-console.log(doHaveIt);
+// console.log(hasIt);
+// console.log(doesntHaveIt);
+// console.log(doHaveIt);
+
+function totalIntegers(arr, total = 0) {
+    if (!arr[0]) return 0
+
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            total += totalIntegers(arr[i]);
+        } else if (Number.isInteger(arr[i])) {
+            total += 1;
+        }
+    }
+
+    return total;
+}
+
+// const seven = totalIntegers([[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]]); // 7
+// console.log(seven)
+
+function sumSquares(arr, total = 0) {
+    if (!arr[0]) return 0
+
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            total += sumSquares(arr[i]);
+        } else if (Number.isInteger(arr[i])) {
+            total += arr[i] * arr[i];
+        }
+    }
+
+    return total;
+}
+
+// var l = [10,[[10],10],[10]];
+// console.log(sumSquares(l)); // 1 + 4 + 9 = 14
+
+function replicate(times, n, arr = []) {
+    if (times <= 0) return arr
+
+    arr.push(n);
+
+    return replicate(times - 1, n, arr);
+}
+
+let r = replicate(1, 69);
+console.log(r);
